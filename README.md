@@ -1,11 +1,19 @@
 # Stocks Dashboard for Top Companies
 
-This project provides:
+A simple full-stack app:
 
-- A Flask backend that fetches stock data with `yfinance`, calculates each company's 200-week SMA, and returns JSON.
-- A React frontend that displays a searchable, sortable table of company price vs SMA distance.
+- **Backend**: Flask API (`/api/companies`) that pulls Yahoo Finance data via `yfinance` and computes 200-week SMA + diff %.
+- **Frontend**: React table with search and sortable diff column.
 
-## Backend
+## Prerequisites
+
+- Python 3.10+
+- Node.js 18+ and npm
+- Internet access (the backend fetches market data from Yahoo)
+
+---
+
+## 1) Run the backend (Terminal A)
 
 ```bash
 cd backend
@@ -15,9 +23,20 @@ pip install -r requirements.txt
 python server.py
 ```
 
-API endpoint: `http://localhost:5000/api/companies`
+Backend starts at:
 
-## Frontend
+- `http://localhost:5000`
+- API endpoint: `http://localhost:5000/api/companies`
+
+Quick check (in another shell):
+
+```bash
+curl http://localhost:5000/api/companies
+```
+
+---
+
+## 2) Run the frontend (Terminal B)
 
 ```bash
 cd frontend
@@ -25,6 +44,33 @@ npm install
 npm start
 ```
 
-App URL: `http://localhost:3000`
+Frontend starts at:
 
-The frontend reads data from `http://localhost:5000/api/companies`.
+- `http://localhost:3000`
+
+The UI fetches from `http://localhost:5000/api/companies`.
+
+---
+
+## Common issues
+
+- **`npm install` fails with 403**:
+  - Check your npm registry config:
+    ```bash
+    npm config get registry
+    ```
+  - It should usually be:
+    ```bash
+    https://registry.npmjs.org/
+    ```
+  - If it is different and unintentionally set, reset it:
+    ```bash
+    npm config set registry https://registry.npmjs.org/
+    ```
+
+- **Frontend loads but no data appears**:
+  - Ensure backend is running on port `5000`.
+  - Open `http://localhost:5000/api/companies` directly in the browser to confirm JSON is returned.
+
+- **Slow response**:
+  - This is expected when querying many tickers. Add caching/batching for production-scale lists.
