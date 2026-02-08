@@ -1,0 +1,41 @@
+body {
+  font-family: sans-serif;
+  margin: 20px;
+  background-color: #f9f9f9;
+}
+
+.app {
+  max-width: 1100px;
+}
+
+input {
+  padding: 8px;
+  width: 300px;
+  margin-bottom: 10px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  background-color: #fff;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background: #f0f0f0;
+}
+
+th.sortable:hover {
+  cursor: pointer;
+  background: #e0e0e0;
+}
+
+.error {
+  color: #b00020;
+}
